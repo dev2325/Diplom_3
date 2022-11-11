@@ -17,7 +17,7 @@ public abstract class BaseTest {
 
     static User user;
 
-    @Step("Prepare new user")
+    @Step("Prepare new user: register and back to home page")
     public static void prepareNewUser() {
         objHomePage.clickLoginToAccountButton();
         objLoginPage.waitForVisibilityOfElement(objLoginPage.buttonForgotPassword);
