@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,6 +14,7 @@ public class ProfilePage extends BasePage{
 
     protected By buttonLogout = By.xpath(".//button[text()='Выход']");
 
+    @Step("Click 'Logout' button")
     public void clickLogoutButton() {
         driver.findElement(buttonLogout).click();
     }

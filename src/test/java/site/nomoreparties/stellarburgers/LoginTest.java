@@ -3,6 +3,7 @@ package site.nomoreparties.stellarburgers;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.html5.WebStorage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -98,6 +99,13 @@ public class LoginTest extends BaseTest {
             objHeaderPage.clickLogo();
             objHomePage.waitForVisibilityOfElement(objHomePage.buttonLoginToAccount);
         }
+    }
+
+    @After
+    public void clearBrowserData() {
+        driver.manage().deleteAllCookies();
+        ((WebStorage) driver).getSessionStorage().clear();
+        ((WebStorage) driver).getLocalStorage().clear();
     }
 
     @AfterClass

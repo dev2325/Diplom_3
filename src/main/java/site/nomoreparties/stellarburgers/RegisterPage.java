@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,26 +21,32 @@ public class RegisterPage extends BasePage {
 
     protected By errorInvalidPassword = By.xpath(".//p[text()='Некорректный пароль']");
 
+    @Step("Click 'Login' button")
     public void clickLoginButton() {
         driver.findElement(buttonLogin).click();
     }
 
+    @Step("Click 'Register' button")
     public void clickRegisterButton() {
         driver.findElement(buttonRegister).click();
     }
 
+    @Step("Set name value to name field")
     public void setName(String name) {
         driver.findElement(fieldName).sendKeys(name);
     }
 
+    @Step("Set email value to email field")
     public void setEmail(String email) {
         driver.findElement(fieldEmail).sendKeys(email);
     }
 
+    @Step("Set password value to password field")
     public void setPassword(String password) {
         driver.findElement(fieldPassword).sendKeys(password);
     }
 
+    @Step("Register")
     public void register(String name, String email, String password) {
         setName(name);
         setEmail(email);

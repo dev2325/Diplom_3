@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -26,18 +27,22 @@ public class HomePage extends BasePage {
     protected By tabMainSelected =
             By.xpath("//div[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[text()='Начинки']");
 
+    @Step("Click 'Login to account' button")
     public void clickLoginToAccountButton() {
         driver.findElement(buttonLoginToAccount).click();
     }
 
+    @Step("Click 'Buns' tab")
     public void clickTabBuns() {
         driver.findElement(tabBuns).click();
     }
 
+    @Step("Click 'Sauces' tab")
     public void clickTabSauces() {
         driver.findElement(tabSauces).click();
     }
 
+    @Step("Click 'Fillings' tab")
     public void clickTabMain() {
         driver.findElement(tabMain).click();
     }

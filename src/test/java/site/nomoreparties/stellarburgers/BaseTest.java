@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
@@ -16,6 +17,7 @@ public abstract class BaseTest {
 
     static User user;
 
+    @Step("Prepare new user")
     public static void prepareNewUser() {
         objHomePage.clickLoginToAccountButton();
         objLoginPage.waitForVisibilityOfElement(objLoginPage.buttonForgotPassword);
@@ -32,6 +34,7 @@ public abstract class BaseTest {
         Assert.assertEquals("Ожидаемый URL не совпадает с фактическим", HomePage.HOME_PAGE_URL, driver.getCurrentUrl());
     }
 
+    @Step("Log in")
     public static void login() {
         objHomePage.clickLoginToAccountButton();
         objLoginPage.waitForVisibilityOfElement(objLoginPage.buttonForgotPassword);
