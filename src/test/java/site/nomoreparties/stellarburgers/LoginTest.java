@@ -4,6 +4,7 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.WebStorage;
+import site.nomoreparties.stellarburgers.api.APIActions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +23,7 @@ public class LoginTest extends BaseTest {
         objForgotPasswordPage = new ForgotPasswordPage(driver);
         driver.get(HomePage.HOME_PAGE_URL);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        apiActions = new APIActions();
         prepareNewUser();
     }
 
@@ -99,10 +101,7 @@ public class LoginTest extends BaseTest {
             objHeaderPage.clickLogo();
             objHomePage.waitForVisibilityOfElement(objHomePage.buttonLoginToAccount);
         }
-    }
 
-    @After
-    public void clearBrowserData() {
         driver.manage().deleteAllCookies();
         ((WebStorage) driver).getSessionStorage().clear();
         ((WebStorage) driver).getLocalStorage().clear();
@@ -110,6 +109,7 @@ public class LoginTest extends BaseTest {
 
     @AfterClass
     public static void tearDown() {
+        apiActions.deleteUser(user);
         driver.quit();
     }
 }

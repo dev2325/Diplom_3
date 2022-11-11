@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import site.nomoreparties.stellarburgers.api.APIActions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +24,7 @@ public class LogoutTest extends BaseTest {
         objProfilePage = new ProfilePage(driver);
         driver.get(HomePage.HOME_PAGE_URL);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        apiActions = new APIActions();
         prepareNewUser();
         login();
     }
@@ -41,6 +43,7 @@ public class LogoutTest extends BaseTest {
 
     @After
     public void tearDown() {
+        apiActions.deleteUser(user);
         driver.quit();
     }
 }

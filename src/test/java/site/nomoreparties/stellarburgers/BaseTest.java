@@ -3,6 +3,8 @@ package site.nomoreparties.stellarburgers;
 import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import site.nomoreparties.stellarburgers.api.APIActions;
+import site.nomoreparties.stellarburgers.dto.UserRequest;
 
 public abstract class BaseTest {
 
@@ -15,7 +17,8 @@ public abstract class BaseTest {
     protected static ProfilePage objProfilePage;
     protected static ForgotPasswordPage objForgotPasswordPage;
 
-    static User user;
+    static UserRequest user;
+    static APIActions apiActions;
 
     @Step("Prepare new user: register and back to home page")
     public static void prepareNewUser() {
@@ -25,7 +28,7 @@ public abstract class BaseTest {
         objLoginPage.clickRegisterButton();
         objRegisterPage.waitForVisibilityOfElement(objRegisterPage.fieldName);
 
-        user = User.getRandomUser(); // подготовим объект юзера с рандомными данными
+        user = UserRequest.getRandomUser(); // подготовим объект юзера с рандомными данными
         objRegisterPage.register(user.getName(), user.getEmail(), user.getPassword()); // регистрируем юзера
         objLoginPage.waitForVisibilityOfElement(objLoginPage.buttonForgotPassword);
 

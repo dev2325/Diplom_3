@@ -1,8 +1,8 @@
-package site.nomoreparties.stellarburgers;
+package site.nomoreparties.stellarburgers.dto;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class User {
+public class UserRequest {
 
     private String name;
     private String email;
@@ -32,8 +32,8 @@ public class User {
         this.password = password;
     }
 
-    public static User getRandomUser() {
-        User user = new User();
+    public static UserRequest getRandomUser() {
+        UserRequest user = new UserRequest();
 
         user.setName(RandomStringUtils.randomAlphabetic(5));
         user.setEmail(getRandomEmail());
@@ -41,8 +41,8 @@ public class User {
         return user;
     }
 
-    public static User getRandomUserWithPasswordLessSixSymbols() {
-        User user = new User();
+    public static UserRequest getRandomUserWithPasswordLessSixSymbols() {
+        UserRequest user = new UserRequest();
 
         user.setName(RandomStringUtils.randomAlphabetic(5));
         user.setEmail(getRandomEmail());
@@ -50,8 +50,15 @@ public class User {
         return user;
     }
 
-    public static String getRandomEmail(){
+    public static String getRandomEmail() {
         return RandomStringUtils.randomAlphabetic(5).toLowerCase() + "@"
                 + RandomStringUtils.randomAlphabetic(5).toLowerCase() + ".com";
+    }
+
+    public LoginRequest prepareFrom(UserRequest user) {
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(user.getEmail());
+        loginRequest.setPassword(user.getPassword());
+        return loginRequest;
     }
 }

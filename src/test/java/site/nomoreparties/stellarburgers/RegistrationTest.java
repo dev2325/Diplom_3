@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import site.nomoreparties.stellarburgers.api.APIActions;
+import site.nomoreparties.stellarburgers.dto.UserRequest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +23,7 @@ public class RegistrationTest extends BaseTest {
         objHomePage = new HomePage(driver);
         objLoginPage = new LoginPage(driver);
         objRegisterPage = new RegisterPage(driver);
+        apiActions = new APIActions();
         driver.get(HomePage.HOME_PAGE_URL);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
@@ -29,7 +32,7 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Register a new user positive test")
     public void registerNewUserPositiveTest() {
         navigateToRegisterPage();
-        user = User.getRandomUser(); // подготовим объект юзера с рандомными данными
+        user = UserRequest.getRandomUser(); // подготовим объект юзера с рандомными данными
         objRegisterPage.register(user.getName(), user.getEmail(), user.getPassword());
 
         // на случай если после регистрации автоматически не перекинет на страницу авторизации, идем туда принудительно
@@ -47,7 +50,7 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Try to register a new user with password less than six symbols then error")
     public void tryRegisterNewUserWithPasswordLessSixSymThenError() {
         navigateToRegisterPage();
-        user = User.getRandomUserWithPasswordLessSixSymbols(); // подготовим юзера с коротким паролем до 6 символов
+        user = UserRequest.getRandomUserWithPasswordLessSixSymbols(); // подготовим юзера с коротким паролем до 6 символов
         objRegisterPage.register(user.getName(), user.getEmail(), user.getPassword());
         objRegisterPage.waitForVisibilityOfElement(objRegisterPage.errorInvalidPassword);
         Assert.assertTrue(objRegisterPage.isElementDisplayed(objRegisterPage.errorInvalidPassword));
@@ -65,6 +68,7 @@ public class RegistrationTest extends BaseTest {
 
     @After
     public void tearDown() {
+        apiActions.deleteUser(user);
         driver.quit();
     }
 }
